@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../../styles';
 import colors from '../../styles/colors';
 
 import * as enums from '../../utils/enums/Task';
@@ -26,12 +27,18 @@ export const Card = styled.div`
   padding: 16px;
   margin-bottom: 32px;
   border-radius: 16px;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 16px;
+  }
 `;
 
 export const Title = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 16px;
 `;
 
 export const Tag = styled.span<TagProps>`
@@ -62,22 +69,6 @@ export const Description = styled.textarea`
 export const ActionsBar = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 16px;
-`;
-
-export const Button = styled.button`
-  font-size: 12px;
-  font-weight: bold;
-  color: #fff;
-  padding: 8px 12px;
-  border: none;
-  cursor: pointer;
-  background-color: #2f3640;
-  border-radius: 8px;
-  margin-right: 8px;
-`;
-
-export const ButtonSave = styled(Button)`
-  background-color: ${colors.green};
 `;
 
 export const ButtonCancelRemove = styled(Button)`

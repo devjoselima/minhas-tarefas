@@ -3,7 +3,7 @@ import { RootReducer } from '../../store';
 
 import Task from '../../components/Task';
 
-import { Container } from './styles';
+import { MainContainer, Title } from '../../styles';
 
 const TasksList = () => {
   const { items } = useSelector((state: RootReducer) => state.tasks);
@@ -30,18 +30,28 @@ const TasksList = () => {
     }
   };
 
+  const showFilterResult = (quantity: number) => {
+    let msg = '';
+    const complement =
+      term !== undefined && term.length > 0 ? `e "${term}" ` : '';
+
+    if (critery == 'todas') {
+      msg = `${quantity} tarefas(s) encontrada(s) como: todas ${complement}`;
+    } else {
+      msg = `${quantity} tarefa(s) encontrada(s) como: ${`${critery} = ${value}`} ${complement}`;
+    }
+
+    return msg;
+  };
+
+  const tasks = filterTasks();
+  const msg = showFilterResult(tasks.length);
+
   return (
-    <Container>
-      <p>
-        2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;{term}&ldquo;
-      </p>
+    <MainContainer>
+      <Title as="p">{msg}</Title>
       <ul>
-        <li>{term}</li>
-        <li>{critery}</li>
-        <li>{value}</li>
-      </ul>
-      <ul>
-        {filterTasks().map((t) => (
+        {tasks.map((t) => (
           <li key={t.title}>
             <Task
               id={t.id}
@@ -53,7 +63,7 @@ const TasksList = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </MainContainer>
   );
 };
 
